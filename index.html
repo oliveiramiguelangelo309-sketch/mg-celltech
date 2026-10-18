@@ -1,0 +1,691 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/favicon.svg">
+<meta property="og:title" content="mg.celltech">
+<meta property="og:description" content="Conserto de celular e criação de sites profissionais no Rio de Janeiro. Orçamento pelo WhatsApp.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<title>mg.celltech</title>
+<meta name="description" content="Conserto de celular e criação de sites profissionais no Rio de Janeiro. Orçamento pelo WhatsApp.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<meta name="theme-color" content="#1A0B2E">
+<meta name="format-detection" content="telephone=no">
+<style>
+html{padding-top:env(safe-area-inset-top,0px)}
+[hidden]{display:none!important}
+img{max-width:100%;height:auto}
+/* Layout: navbar com a troca Celular | Sites no centro. Abertura em faixa violeta como as capas dos carrosséis; o resto em roxo escuro com faixas alternadas no lugar de bordas. Espaços e tipos fluidos (clamp) do celular pequeno ao tablet deitado */
+:root{
+  /* cores da marca (tríade a partir do roxo) */
+  --bg:#1A0B2E;
+  --bg-2:#221040;
+  --bg-3:#2D1654;
+  --bg-4:#3A1D6B;
+  --violet:#7C3AED;
+  --violet-hi:#A07BFF;
+  --violet-deep:#5B21C9;
+  --fg:#F5F3FA;
+  --fg-2:#CDBFFD;
+  --fg-3:#9A8AC4;
+  --orange:#F2994A;
+  --orange-ink:#2B1302;
+  --mint:#3DDC97;
+  --mint-ink:#062A1B;
+  --danger:#FF8A80;
+  --accent:var(--orange);
+  --accent-ink:var(--orange-ink);
+  /* tipos */
+  --f-body:"Manrope",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,"Roboto Mono",monospace;
+  --t-body:clamp(16px,0.4vw + 15px,18px);
+  --t-lead:clamp(17px,0.6vw + 15.5px,20px);
+  --t-h1:clamp(40px,7.2vw,92px);
+  --t-h2:clamp(27px,3.4vw + 12px,44px);
+  --t-h3:clamp(18px,0.4vw + 16px,20px);
+  /* espaços fluidos */
+  --gutter:clamp(18px,4.5vw,48px);
+  --s-1:clamp(8px,1vw,10px);
+  --s-2:clamp(12px,1.6vw,16px);
+  --s-3:clamp(18px,2.4vw,26px);
+  --s-4:clamp(26px,3.6vw,44px);
+  --s-5:clamp(40px,6vw,72px);
+  --band:clamp(60px,9vw,108px);
+  --wrap:1140px;
+  --r:8px;
+  --tap:48px;
+  --header-h:72px;
+  color-scheme:dark;
+}
+[data-page="site"]{--accent:var(--mint);--accent-ink:var(--mint-ink)}
+@media (max-width:640px){:root{--header-h:122px}}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:var(--t-body);line-height:1.6;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;-webkit-tap-highlight-color:transparent;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+a{color:inherit}
+button,input,textarea{font:inherit;-webkit-appearance:none;appearance:none}
+.wrap{width:100%;max-width:var(--wrap);margin:0 auto;padding-left:max(var(--gutter),env(safe-area-inset-left,0px));padding-right:max(var(--gutter),env(safe-area-inset-right,0px))}
+.band{padding-block:var(--band);scroll-margin-top:var(--header-h)}
+.band.alt{background:var(--bg-2)}
+h1,h2,h3{text-wrap:balance;margin:0;letter-spacing:-0.025em;overflow-wrap:break-word}
+h2{font-size:var(--t-h2);font-weight:800;line-height:1.08}
+h3{font-size:var(--t-h3);font-weight:700;line-height:1.3}
+p{margin:0}
+.eyebrow{font-family:var(--f-mono);font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--violet-hi)}
+.lead{color:var(--fg-2);max-width:62ch;font-size:var(--t-lead)}
+.sec-head{display:grid;gap:var(--s-2);margin-bottom:var(--s-5);max-width:760px}
+.sec-head h2 .ac{color:var(--accent)}
+
+/* ---------- navbar ---------- */
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:rgba(26,11,46,.9);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.nav{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:var(--s-2);padding-block:12px}
+.logo{font-weight:800;font-size:clamp(18px,1.2vw + 14px,21px);letter-spacing:-0.02em;text-decoration:none;justify-self:start;min-height:var(--tap);display:inline-flex;align-items:center}
+.logo b{color:var(--violet-hi)}
+.switch{display:grid;grid-template-columns:1fr 1fr;background:var(--bg-3);border-radius:999px;padding:4px;position:relative;box-shadow:inset 0 0 0 1px rgba(160,123,255,.18)}
+.switch a{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;min-height:44px;font:700 15px/1 var(--f-body);color:var(--fg-2);text-decoration:none;padding:0 clamp(18px,2.4vw,30px);border-radius:999px;white-space:nowrap;transition:color .2s ease}
+.switch a[aria-current="page"]{color:#fff}
+.switch .pill{position:absolute;z-index:0;top:4px;bottom:4px;left:4px;width:calc(50% - 4px);border-radius:999px;background:var(--violet);transition:transform .28s cubic-bezier(.3,.7,.3,1)}
+[data-page="site"] .switch .pill{transform:translateX(100%)}
+.nav-cta{justify-self:end}
+@media (max-width:640px){
+  .nav{grid-template-columns:1fr auto;grid-template-areas:"logo cta" "sw sw";row-gap:10px;padding-block:10px 12px}
+  .logo{grid-area:logo}.nav-cta{grid-area:cta}
+  .switch{grid-area:sw;width:100%}
+  .switch a{padding:0 10px}
+}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:var(--tap);font:700 16px/1.1 var(--f-body);text-align:center;text-decoration:none;padding:14px 22px;border-radius:var(--r);border:0;cursor:pointer;touch-action:manipulation;transition:background .15s ease,transform .15s ease}
+.btn:active{transform:translateY(1px)}
+.btn-wa{background:var(--mint);color:var(--mint-ink)}
+.btn-ghost{background:var(--bg-3);color:var(--fg)}
+.btn-dark{background:var(--bg);color:var(--fg)}
+.btn-sm{min-height:44px;padding:10px 16px;font-size:14px}
+@media (hover:hover){
+  .btn-wa:hover{background:#5BE6AA}
+  .btn-ghost:hover{background:var(--bg-4)}
+  .btn-dark:hover{background:#26113F}
+  .switch a:not([aria-current]):hover{color:var(--fg)}
+}
+:focus-visible{outline:2px solid #fff;outline-offset:3px;border-radius:4px}
+
+/* ---------- abertura (faixa violeta, igual às capas) ---------- */
+.hero{background:var(--violet);padding-block:clamp(48px,8vw,104px) clamp(56px,9vw,112px);position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;right:-12vw;top:-20vw;width:min(70vw,760px);aspect-ratio:1;border-radius:50%;background:var(--violet-deep);opacity:.55;pointer-events:none}
+.hero .wrap{position:relative;z-index:1}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:var(--s-5);align-items:center}
+.hero h1{font-size:var(--t-h1);font-weight:800;line-height:.98;letter-spacing:-0.045em;color:#fff}
+.hero h1 em{font-style:normal;color:var(--bg)}
+.hero-copy{display:grid;gap:var(--s-3);min-width:0}
+.hero .eyebrow{color:#fff;opacity:.85}
+.hero .lead{color:#F1EAFF;max-width:56ch}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px}
+@media (max-width:900px){.hero-grid{grid-template-columns:1fr}}
+@media (max-width:480px){.hero-actions .btn{flex:1 1 100%}}
+
+.ticket{background:var(--bg);border-radius:var(--r);padding:clamp(20px,2.6vw,28px);display:grid;gap:14px;font-family:var(--f-mono);font-size:clamp(12.5px,0.3vw + 11.5px,14px);color:var(--fg-2);min-width:0}
+.ticket-row{display:flex;flex-wrap:wrap;justify-content:space-between;column-gap:16px;row-gap:2px}
+.ticket-row span:last-child{color:var(--fg);text-align:right;margin-left:auto}
+.ticket .k{color:var(--orange)}.ticket .ok{color:var(--mint)}
+.ticket hr{all:unset;display:block;height:1px;background:var(--bg-3)}
+.code{background:var(--bg);border-radius:var(--r);padding:clamp(20px,2.6vw,28px);font-family:var(--f-mono);font-size:clamp(12px,0.35vw + 11px,14px);line-height:1.8;color:var(--fg-2);overflow-x:auto;-webkit-overflow-scrolling:touch;white-space:pre;margin:0;min-width:0;max-width:100%}
+.code .c{color:var(--fg-3)}.code .kw{color:var(--violet-hi)}.code .s{color:var(--mint)}.code .p{color:var(--orange)}
+
+/* ---------- blocos ---------- */
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;border-radius:var(--r);overflow:hidden}
+.item{background:var(--bg-3);padding:clamp(22px,2.8vw,32px);display:grid;gap:var(--s-1);align-content:start;min-width:0}
+.item .sym{font-family:var(--f-mono);font-size:13px;color:var(--accent)}
+.item p{color:var(--fg-2);font-size:clamp(15px,0.3vw + 14px,16.5px)}
+@media (max-width:960px){.grid3{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:580px){.grid3{grid-template-columns:1fr}}
+
+.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--s-4);counter-reset:s;list-style:none;padding:0;margin:0}
+.steps li{display:grid;gap:var(--s-1);align-content:start;min-width:0}
+.steps li::before{counter-increment:s;content:"0" counter(s);font-family:var(--f-mono);font-size:14px;color:#fff;background:var(--violet);width:40px;height:40px;border-radius:50%;display:grid;place-items:center;margin-bottom:6px}
+.steps p{color:var(--fg-2);font-size:clamp(15px,0.3vw + 14px,16.5px)}
+@media (max-width:960px){.steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.steps{grid-template-columns:1fr}}
+
+.compare{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px;border-radius:var(--r);overflow:hidden}
+.cmp{background:var(--bg-3);padding:clamp(22px,2.8vw,32px);display:grid;gap:var(--s-2);align-content:start;min-width:0}
+.cmp .tag{font-family:var(--f-mono);font-size:13px}
+.cmp.orig .tag{color:var(--mint)}.cmp.par .tag{color:var(--orange)}
+.cmp ul{margin:0;padding:0;list-style:none;display:grid;gap:10px;color:var(--fg-2);font-size:clamp(15px,0.3vw + 14px,16.5px)}
+.cmp li{display:grid;grid-template-columns:minmax(76px,96px) minmax(0,1fr);gap:12px}
+.cmp li span:first-child{color:var(--fg-3)}
+.note{margin-top:var(--s-3);color:var(--fg-2);max-width:68ch}
+@media (max-width:640px){.compare{grid-template-columns:1fr}}
+
+.incl{display:flex;flex-wrap:wrap;gap:10px;margin-top:var(--s-4)}
+.incl span{background:var(--bg-3);color:var(--fg-2);font-size:15px;font-weight:600;padding:10px 14px;border-radius:999px}
+.incl span::before{content:"✓ ";color:var(--mint)}
+
+/* ---------- formulário ---------- */
+.quote{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:var(--s-5);align-items:start}
+form{display:grid;gap:var(--s-3);min-width:0}
+.row2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s-2)}
+.field{display:grid;gap:8px;min-width:0}
+label,.legend{font-size:14px;font-weight:600;color:var(--fg-2)}
+label .opt{font-weight:500;color:var(--fg-3)}
+input,textarea{width:100%;font:500 max(16px,var(--t-body))/1.4 var(--f-body);color:var(--fg);background:var(--bg-3);border:0;border-radius:var(--r);min-height:52px;padding:14px 16px;transition:background .15s ease,box-shadow .15s ease}
+textarea{min-height:128px;resize:vertical}
+input::placeholder,textarea::placeholder{color:var(--fg-3);opacity:1}
+input:focus,textarea:focus{outline:none;background:var(--bg-4);box-shadow:0 0 0 2px var(--violet-hi)}
+.invalid{box-shadow:0 0 0 2px var(--danger)!important}
+.err{font-size:13px;color:var(--danger)}
+.err:empty{display:none}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font:600 14px/1 var(--f-body);color:var(--fg-2);background:var(--bg-3);border:0;border-radius:999px;min-height:44px;padding:0 16px;cursor:pointer;touch-action:manipulation;transition:background .15s ease,color .15s ease}
+.chip[aria-pressed="true"]{background:var(--violet);color:#fff}
+@media (hover:hover){.chip:not([aria-pressed="true"]):hover{color:var(--fg);background:var(--bg-4)}}
+.send{display:grid;gap:12px;justify-items:start}
+.fine{font-size:13px;color:var(--fg-3);max-width:52ch}
+@media (max-width:960px){.quote{grid-template-columns:1fr}}
+@media (max-width:560px){.row2{grid-template-columns:1fr}.send .btn{width:100%}}
+
+.preview{position:sticky;top:calc(env(safe-area-inset-top,0px) + var(--header-h) + 16px);display:grid;gap:12px;min-width:0}
+@media (max-width:960px){.preview{position:static;order:-1}}
+.preview .cap{font-family:var(--f-mono);font-size:13px;color:var(--fg-3)}
+.chat{background:#0E1A14;border-radius:var(--r);padding:clamp(16px,2vw,22px) clamp(14px,2vw,18px) clamp(20px,2.4vw,26px);display:grid}
+.bubble{justify-self:end;max-width:min(92%,440px);background:#1E5B3E;color:#ECFFF5;border-radius:12px 3px 12px 12px;padding:12px 14px 24px;font-size:15px;line-height:1.5;white-space:pre-wrap;overflow-wrap:anywhere;position:relative}
+.bubble .t{position:absolute;right:10px;bottom:5px;font-size:11px;color:#9FD9BC;font-family:var(--f-mono)}
+.bubble.ph .txt{color:#9FD9BC;font-style:italic}
+
+/* ---------- faq ---------- */
+.faq{display:grid;gap:4px;max-width:800px;border-radius:var(--r);overflow:hidden}
+details{background:var(--bg-3);padding:0 clamp(18px,2.4vw,26px)}
+summary{cursor:pointer;list-style:none;font-weight:700;font-size:var(--t-h3);min-height:var(--tap);padding-block:18px;display:flex;align-items:center;justify-content:space-between;gap:16px;touch-action:manipulation}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";flex:none;font-family:var(--f-mono);color:var(--violet-hi);font-size:22px;line-height:1}
+details[open] summary::after{content:"–"}
+details p{color:var(--fg-2);padding-bottom:20px;max-width:64ch;font-size:clamp(15px,0.3vw + 14px,16.5px)}
+
+/* ponte para a outra página (faixa violeta) */
+.cross-band{background:var(--violet);padding-block:clamp(44px,6vw,72px)}
+.cross{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--s-3)}
+.cross p{color:#F1EAFF;max-width:56ch;font-size:var(--t-lead)}
+.cross strong{color:#fff}
+@media (max-width:560px){.cross .btn{width:100%}}
+
+/* ---------- rodapé ---------- */
+footer{background:#120720;padding-block:var(--s-5);padding-bottom:calc(var(--s-5) + env(safe-area-inset-bottom,0px))}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:var(--s-4);align-items:end}
+.contact{display:grid;gap:6px;min-width:0}
+.contact .num{font-family:var(--f-mono);font-size:clamp(19px,1.4vw + 14px,24px);color:var(--fg);-webkit-user-select:all;user-select:all}
+.contact-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px;align-items:center}
+.copied{font-size:13px;color:var(--mint)}
+.small{font-size:14px;color:var(--fg-3)}
+@media (max-width:560px){.contact-actions .btn{flex:1 1 auto}}
+
+/* tablets e celulares deitados: abertura mais baixa */
+@media (orientation:landscape) and (max-height:520px){
+  .hero{padding-block:40px 48px}
+  :root{--band:56px}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#celular" data-go="celular">mg<b>.</b>celltech</a>
+    <nav class="switch" aria-label="Escolha o serviço">
+      <span class="pill" aria-hidden="true"></span>
+      <a href="#celular" data-go="celular" aria-current="page">Celular</a>
+      <a href="#site" data-go="site">Sites</a>
+    </nav>
+    <button class="btn btn-wa btn-sm nav-cta" type="button" data-scroll="orcamento">Orçamento</button>
+  </div>
+</header>
+
+<main>
+<!-- =========================================================
+     PÁGINA: CELULAR
+     ========================================================= -->
+<div id="page-celular" data-view="celular">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">Assistência técnica de celular · Rio de Janeiro</p>
+        <h1><em>Quebrou?</em><br>A gente conserta.</h1>
+        <p class="lead">Prazer, eu sou o Miguel. Comecei consertando celular por hobby e aos poucos fui me profissionalizando. Hoje cuido de iPhone e Android com diagnóstico honesto, peça explicada e preço combinado antes de abrir o aparelho.</p>
+        <div class="hero-actions">
+          <button class="btn btn-wa" type="button" data-scroll="orcamento">Pedir orçamento no WhatsApp</button>
+          <button class="btn btn-dark" type="button" data-scroll="c-servicos">Ver serviços</button>
+        </div>
+      </div>
+      <div class="ticket" aria-label="Exemplo de ordem de serviço">
+        <div class="ticket-row"><span>Ordem de serviço</span><span>exemplo</span></div>
+        <hr>
+        <div class="ticket-row"><span>Aparelho</span><span>iPhone 11</span></div>
+        <div class="ticket-row"><span>Sintoma</span><span class="k">tela trincada, toque falhando</span></div>
+        <div class="ticket-row"><span>Diagnóstico</span><span>troca de tela</span></div>
+        <div class="ticket-row"><span>Peça</span><span>original ou paralela, você escolhe</span></div>
+        <hr>
+        <div class="ticket-row"><span>Status</span><span class="ok">pronto para retirada</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band alt" id="c-servicos">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Serviços</p>
+        <h2>Do vidro trincado ao celular que <span class="ac">não liga</span></h2>
+      </div>
+      <div class="grid3">
+        <article class="item"><span class="sym">Tela quebrada ou sem toque</span><h3>Troca de tela</h3><p>Explico a diferença entre as peças antes de trocar, para você decidir sabendo o que está pagando.</p></article>
+        <article class="item"><span class="sym">Descarrega rápido ou esquenta</span><h3>Troca de bateria</h3><p>Bateria fraca, inchada ou que desliga sozinha. O aparelho é testado antes de voltar para você.</p></article>
+        <article class="item"><span class="sym">Propaganda abrindo sozinha</span><h3>Vírus e apps indesejados</h3><p>Limpo o sistema, removo o que não deveria estar ali e deixo o celular leve de novo.</p></article>
+        <article class="item"><span class="sym">Lento ou travando</span><h3>Solução de travamentos</h3><p>Descubro se o problema é de sistema ou de peça antes de propor qualquer troca.</p></article>
+        <article class="item"><span class="sym">Medo de perder as fotos</span><h3>Backup e recuperação</h3><p>Salvo fotos, contatos e arquivos antes do conserto, ou tento recuperar o que sumiu.</p></article>
+        <article class="item"><span class="sym">Para não chegar a quebrar</span><h3>Manutenção preventiva</h3><p>Limpeza da entrada de carregador e dos alto-falantes, e revisão geral do aparelho.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Como funciona</p>
+        <h2>Você sabe o preço antes de eu abrir o celular</h2>
+      </div>
+      <ol class="steps">
+        <li><h3>Você me chama</h3><p>Preenche o formulário e a mensagem chega direto no meu WhatsApp.</p></li>
+        <li><h3>Eu passo o orçamento</h3><p>Com o modelo e o problema, respondo com o valor e as opções de peça.</p></li>
+        <li><h3>Combinamos tudo</h3><p>Preço, prazo e tipo de peça ficam acertados antes do serviço.</p></li>
+        <li><h3>Conserto e entrega</h3><p>Testo o aparelho com você antes de devolver.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="band alt">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Antes de trocar a tela</p>
+        <h2>Original ou paralela: por que o preço muda tanto</h2>
+      </div>
+      <div class="compare">
+        <div class="cmp orig">
+          <span class="tag">Tela original</span>
+          <ul>
+            <li><span>Imagem</span><span>Cores e brilho fiéis ao de fábrica</span></li>
+            <li><span>Toque</span><span>Resposta precisa</span></li>
+            <li><span>Bateria</span><span>Consumo normal</span></li>
+            <li><span>Preço</span><span>Maior</span></li>
+          </ul>
+        </div>
+        <div class="cmp par">
+          <span class="tag">Tela paralela</span>
+          <ul>
+            <li><span>Imagem</span><span>Pode ter cores mais apagadas e brilho menor</span></li>
+            <li><span>Toque</span><span>Funciona bem no dia a dia</span></li>
+            <li><span>Bateria</span><span>Pode gastar um pouco mais</span></li>
+            <li><span>Preço</span><span>Menor</span></li>
+          </ul>
+        </div>
+      </div>
+      <p class="note">As duas resolvem. A escolha depende do seu uso e do seu orçamento, e eu passo o valor das duas opções.</p>
+    </div>
+  </section>
+
+  <section class="band" data-orcamento>
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Orçamento de conserto</p>
+        <h2>Conta o que aconteceu com o seu celular</h2>
+        <p class="lead">Preencha os campos e toque em enviar. O WhatsApp abre com a mensagem pronta, é só mandar.</p>
+      </div>
+      <div class="quote">
+        <form id="f-celular" novalidate>
+          <div class="row2">
+            <div class="field"><label for="c-nome">Seu nome</label><input id="c-nome" autocomplete="given-name" placeholder="Ana"><span class="err" id="c-nome-err" role="alert"></span></div>
+            <div class="field"><label for="c-bairro">Bairro</label><input id="c-bairro" autocomplete="address-level3" placeholder="Campo Grande"><span class="err" id="c-bairro-err" role="alert"></span></div>
+          </div>
+          <div class="field"><label for="c-modelo">Modelo do celular</label><input id="c-modelo" placeholder="iPhone 11, Galaxy A54, Moto G84…"><span class="err" id="c-modelo-err" role="alert"></span></div>
+          <div class="field">
+            <span class="legend" id="c-tipo-label">O que está acontecendo?</span>
+            <div class="chips" role="group" aria-labelledby="c-tipo-label" id="c-chips"></div>
+          </div>
+          <div class="field"><label for="c-detalhe">Descreva o problema</label><textarea id="c-detalhe" placeholder="Caiu no chão ontem, a tela trincou no canto e o toque parou de funcionar embaixo."></textarea><span class="err" id="c-detalhe-err" role="alert"></span></div>
+          <div class="send">
+            <a class="btn btn-wa" id="c-enviar" href="https://wa.me/5521981119638" target="_blank" rel="noopener">Enviar pelo WhatsApp</a>
+            <p class="fine">Seus dados vão só na mensagem para o meu WhatsApp. Se o botão não abrir, chame direto no 21 98111-9638.</p>
+          </div>
+        </form>
+        <aside class="preview" aria-live="polite"><span class="cap">Prévia da mensagem</span><div class="chat"><div class="bubble" id="c-bubble"></div></div></aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="band alt">
+    <div class="wrap">
+      <div class="sec-head"><p class="eyebrow">Dúvidas</p><h2>O que todo mundo pergunta</h2></div>
+      <div class="faq">
+        <details><summary>Quanto custa o conserto?</summary><p>Depende do modelo e da peça. Mande o modelo e o problema pelo formulário e eu respondo com o valor antes de mexer no aparelho.</p></details>
+        <details><summary>Quanto tempo demora?</summary><p>Varia conforme o serviço e a disponibilidade da peça. O prazo fica combinado junto com o orçamento.</p></details>
+        <details><summary>Vou perder minhas fotos?</summary><p>Na troca de tela ou de bateria os arquivos não são apagados. Mesmo assim, se quiser segurança extra, faço o backup antes.</p></details>
+        <details><summary>Conserta iPhone e Android?</summary><p>Sim, os dois. Se o seu modelo for mais raro, me mande o nome exato que eu confirmo se consigo a peça.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="cross-band">
+    <div class="wrap">
+      <div class="cross">
+        <p><strong>Tem um negócio?</strong> Além de consertar celular, eu também crio sites profissionais que levam o cliente direto para o seu WhatsApp.</p>
+        <a class="btn btn-dark" href="#site" data-go="site">Conhecer os sites</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- =========================================================
+     PÁGINA: SITES
+     ========================================================= -->
+<div id="page-site" data-view="site" hidden>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">Criação de sites · Rio de Janeiro</p>
+        <h1>Um site que <em>trabalha</em> pelo seu negócio.</h1>
+        <p class="lead">Faço o site do zero, no código, pensado para abrir rápido no celular e levar o cliente direto para o seu WhatsApp. Igual ao formulário de orçamento que você vai ver aqui embaixo.</p>
+        <div class="hero-actions">
+          <button class="btn btn-wa" type="button" data-scroll="orcamento">Pedir orçamento de site</button>
+          <button class="btn btn-dark" type="button" data-scroll="s-servicos">Ver o que eu faço</button>
+        </div>
+      </div>
+<pre class="code" aria-label="Trecho do código do formulário deste site"><span class="c">// o formulário deste site, por dentro</span>
+<span class="kw">const</span> pedido = {
+  nome: <span class="s">"Léo"</span>,
+  negocio: <span class="s">"Barbearia do Léo"</span>,
+  precisa: <span class="s">"página de vendas"</span>
+};
+
+<span class="p">enviarParaWhatsApp</span>(pedido);
+<span class="c">// a mensagem chega pronta no celular</span></pre>
+    </div>
+  </section>
+
+  <section class="band alt" id="s-servicos">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">O que eu faço</p>
+        <h2>Do link na bio ao <span class="ac">site completo</span></h2>
+      </div>
+      <div class="grid3">
+        <article class="item"><span class="sym">Para ser encontrado</span><h3>Site institucional</h3><p>Quem você é, o que faz, onde atende e como falar com você, num endereço só seu.</p></article>
+        <article class="item"><span class="sym">Para vender um serviço</span><h3>Página de vendas</h3><p>Uma página única e direta, feita para transformar visita em mensagem no WhatsApp.</p></article>
+        <article class="item"><span class="sym">Para mostrar produtos</span><h3>Catálogo ou cardápio digital</h3><p>Seus produtos com foto, descrição e preço, e o pedido indo pronto para o WhatsApp.</p></article>
+        <article class="item"><span class="sym">Para a bio do Instagram</span><h3>Link na bio personalizado</h3><p>Uma página com a sua cara reunindo WhatsApp, redes, localização e links importantes.</p></article>
+        <article class="item"><span class="sym">Para receber pedidos</span><h3>Formulário de orçamento</h3><p>O cliente preenche os dados e a mensagem chega organizada no seu WhatsApp.</p></article>
+        <article class="item"><span class="sym">Para o site não parar</span><h3>Ajustes e manutenção</h3><p>Troca de textos, fotos e preços, e pequenas melhorias depois que o site está no ar.</p></article>
+      </div>
+      <div class="incl" aria-label="Como os sites são feitos">
+        <span>Feito para o celular primeiro</span>
+        <span>Leve e rápido</span>
+        <span>Botão e formulário para WhatsApp</span>
+        <span>Com as cores e a cara da sua marca</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Como funciona</p>
+        <h2>Você aprova antes de ir para o ar</h2>
+      </div>
+      <ol class="steps">
+        <li><h3>Conversa</h3><p>Você me conta o negócio, o público e o que o site precisa fazer.</p></li>
+        <li><h3>Proposta</h3><p>Mando o que vai ter no site, o preço e o prazo, antes de começar.</p></li>
+        <li><h3>Prévia</h3><p>Você vê o site funcionando e pede os ajustes.</p></li>
+        <li><h3>No ar</h3><p>Publico o site e te mostro como ele funciona.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="band alt" data-orcamento>
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Orçamento de site</p>
+        <h2>Me conta sobre o seu negócio</h2>
+        <p class="lead">Preencha os campos e toque em enviar. O WhatsApp abre com a mensagem pronta, é só mandar.</p>
+      </div>
+      <div class="quote">
+        <form id="f-site" novalidate>
+          <div class="row2">
+            <div class="field"><label for="s-nome">Seu nome</label><input id="s-nome" autocomplete="given-name" placeholder="Léo"><span class="err" id="s-nome-err" role="alert"></span></div>
+            <div class="field"><label for="s-negocio">Nome do negócio</label><input id="s-negocio" autocomplete="organization" placeholder="Barbearia do Léo"><span class="err" id="s-negocio-err" role="alert"></span></div>
+          </div>
+          <div class="row2">
+            <div class="field"><label for="s-bairro">Bairro <span class="opt">(opcional)</span></label><input id="s-bairro" autocomplete="address-level3" placeholder="Bangu"><span class="err" id="s-bairro-err" role="alert"></span></div>
+            <div class="field"><label for="s-link">Instagram ou site atual <span class="opt">(opcional)</span></label><input id="s-link" placeholder="@barbeariadoleo"><span class="err" id="s-link-err" role="alert"></span></div>
+          </div>
+          <div class="field">
+            <span class="legend" id="s-tipo-label">Que tipo de site você precisa?</span>
+            <div class="chips" role="group" aria-labelledby="s-tipo-label" id="s-chips"></div>
+          </div>
+          <div class="field"><label for="s-detalhe">Conte o que o site precisa ter</label><textarea id="s-detalhe" placeholder="Quero mostrar os cortes e os preços, e o cliente marcar horário pelo WhatsApp."></textarea><span class="err" id="s-detalhe-err" role="alert"></span></div>
+          <div class="send">
+            <a class="btn btn-wa" id="s-enviar" href="https://wa.me/5521981119638" target="_blank" rel="noopener">Enviar pelo WhatsApp</a>
+            <p class="fine">Seus dados vão só na mensagem para o meu WhatsApp. Se o botão não abrir, chame direto no 21 98111-9638.</p>
+          </div>
+        </form>
+        <aside class="preview" aria-live="polite"><span class="cap">Prévia da mensagem</span><div class="chat"><div class="bubble" id="s-bubble"></div></div></aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="sec-head"><p class="eyebrow">Dúvidas</p><h2>O que todo mundo pergunta</h2></div>
+      <div class="faq">
+        <details><summary>Quanto custa um site?</summary><p>Depende do tamanho e do que o site precisa fazer. Você recebe a proposta com preço e prazo antes de eu começar.</p></details>
+        <details><summary>Preciso já ter domínio e hospedagem?</summary><p>Não precisa. Na proposta eu explico as opções e o que cada uma custa para você decidir.</p></details>
+        <details><summary>Consigo mudar o site depois?</summary><p>Sim. Textos, fotos e preços podem ser atualizados depois que o site está no ar.</p></details>
+        <details><summary>O site funciona no celular?</summary><p>Funciona. Ele é pensado primeiro para a tela do celular, que é de onde vem a maior parte das visitas.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="cross-band">
+    <div class="wrap">
+      <div class="cross">
+        <p><strong>Celular deu problema?</strong> Também conserto iPhone e Android: tela, bateria, vírus, travamentos e backup.</p>
+        <a class="btn btn-dark" href="#celular" data-go="celular">Ver conserto de celular</a>
+      </div>
+    </div>
+  </section>
+</div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="contact">
+      <span class="logo">mg<b>.</b>celltech</span>
+      <span class="small">Conserto de celular e criação de sites · Rio de Janeiro</span>
+    </div>
+    <div class="contact">
+      <span class="small">WhatsApp</span>
+      <span class="num" id="num">21 98111-9638</span>
+      <div class="contact-actions">
+        <button class="btn btn-ghost btn-sm" type="button" id="copiar">Copiar número</button>
+        <a class="btn btn-ghost btn-sm" href="https://instagram.com/mg.celltech" target="_blank" rel="noopener">@mg.celltech no Instagram</a>
+        <span class="copied" id="copied" aria-live="polite"></span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var WHATSAPP = "5521981119638";
+  var $ = function(id){ return document.getElementById(id); };
+
+  /* ================= roteamento entre as páginas ================= */
+  var paginas = ["celular","site"];
+  var atual = null;
+
+  function irPara(nome, rolar){
+    if (paginas.indexOf(nome) < 0) nome = "celular";
+    if (nome === atual) { if (rolar) window.scrollTo({top:0, behavior:"smooth"}); return; }
+    atual = nome;
+    document.documentElement.setAttribute("data-page", nome);
+    paginas.forEach(function(p){ $("page-" + p).hidden = (p !== nome); });
+    document.querySelectorAll(".switch a").forEach(function(a){
+      if (a.getAttribute("data-go") === nome) a.setAttribute("aria-current","page");
+      else a.removeAttribute("aria-current");
+    });
+    try { history.replaceState(null, "", "#" + nome); } catch(e){}
+    if (rolar) window.scrollTo({top:0});
+  }
+
+  document.querySelectorAll("[data-go]").forEach(function(a){
+    a.addEventListener("click", function(ev){ ev.preventDefault(); irPara(a.getAttribute("data-go"), true); });
+  });
+
+  /* rolar até uma seção da página visível */
+  document.querySelectorAll("[data-scroll]").forEach(function(b){
+    b.addEventListener("click", function(){
+      var alvo = b.getAttribute("data-scroll");
+      var el = alvo === "orcamento" ? $("page-" + atual).querySelector("[data-orcamento]") : $(alvo);
+      if (el) el.scrollIntoView({behavior:"smooth", block:"start"});
+    });
+  });
+
+  /* ================= formulários → WhatsApp ================= */
+  function linkWhatsApp(texto){ return "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(texto); }
+  function hora(){ var d = new Date(); return String(d.getHours()).padStart(2,"0") + ":" + String(d.getMinutes()).padStart(2,"0"); }
+
+  function criarFormulario(cfg){
+    var p = cfg.prefixo;
+    var el = {};
+    cfg.campos.forEach(function(k){ el[k] = $(p + k); });
+    var tipos = [];
+    var bubble = $(p + "bubble"), btn = $(p + "enviar"), chipsBox = $(p + "chips");
+
+    function val(k){ return (el[k].value || "").trim(); }
+    function dados(){
+      var d = {tipos: tipos.slice()};
+      cfg.campos.forEach(function(k){ d[k] = val(k); });
+      return d;
+    }
+    function vazio(){ return !tipos.length && cfg.campos.every(function(k){ return !val(k); }); }
+
+    function render(){
+      bubble.innerHTML = "";
+      var txt = document.createElement("span"); txt.className = "txt";
+      if (vazio()){ bubble.classList.add("ph"); txt.textContent = cfg.mensagem(cfg.exemplo); }
+      else { bubble.classList.remove("ph"); txt.textContent = cfg.mensagem(dados()); }
+      bubble.appendChild(txt);
+      var t = document.createElement("span"); t.className = "t"; t.textContent = hora();
+      bubble.appendChild(t);
+      btn.href = linkWhatsApp(cfg.mensagem(dados()));
+    }
+
+    function limpar(k){ el[k].classList.remove("invalid"); el[k].removeAttribute("aria-invalid"); $(p + k + "-err").textContent = ""; }
+    function validar(){
+      cfg.campos.forEach(limpar);
+      var primeiro = null;
+      cfg.obrigatorios.forEach(function(k){
+        if (!val(k)){
+          el[k].classList.add("invalid"); el[k].setAttribute("aria-invalid","true");
+          $(p + k + "-err").textContent = cfg.erros[k];
+          if (!primeiro) primeiro = el[k];
+        }
+      });
+      if (primeiro) primeiro.focus();
+      return !primeiro;
+    }
+
+    cfg.chips.forEach(function(nome){
+      var b = document.createElement("button");
+      b.type = "button"; b.className = "chip"; b.textContent = nome; b.setAttribute("aria-pressed","false");
+      b.addEventListener("click", function(){
+        var i = tipos.indexOf(nome);
+        if (i > -1) tipos.splice(i,1); else tipos.push(nome);
+        b.setAttribute("aria-pressed", i > -1 ? "false" : "true");
+        render();
+      });
+      chipsBox.appendChild(b);
+    });
+
+    cfg.campos.forEach(function(k){
+      el[k].addEventListener("input", function(){ if (val(k)) limpar(k); render(); });
+    });
+    btn.addEventListener("click", function(ev){
+      if (!validar()){ ev.preventDefault(); return; }
+      btn.href = linkWhatsApp(cfg.mensagem(dados()));
+    });
+    $(cfg.form).addEventListener("submit", function(ev){ ev.preventDefault(); if (validar()) btn.click(); });
+
+    render();
+  }
+
+  var erros = {
+    nome:"Escreva seu nome.", bairro:"Diga o seu bairro.", modelo:"Informe o modelo do celular.",
+    negocio:"Diga o nome do seu negócio.", detalhe:"Conte em poucas palavras o que você precisa."
+  };
+  function ou(v){ return v || "…"; }
+
+  criarFormulario({
+    form:"f-celular", prefixo:"c-",
+    campos:["nome","bairro","modelo","detalhe"],
+    obrigatorios:["nome","bairro","modelo","detalhe"],
+    erros:erros,
+    chips:["Tela quebrada","Bateria","Não carrega","Travando ou lento","Vírus ou propaganda","Molhou","Outro"],
+    exemplo:{nome:"Ana", bairro:"Campo Grande", modelo:"iPhone 11", tipos:["Tela quebrada"], detalhe:"Caiu no chão e o toque parou de funcionar embaixo."},
+    mensagem:function(d){
+      var l = ["Olá, Miguel! Vim pelo site da mg.celltech e quero um orçamento de conserto.", "",
+               "*Nome:* " + ou(d.nome), "*Bairro:* " + ou(d.bairro), "*Celular:* " + ou(d.modelo)];
+      if (d.tipos.length) l.push("*Tipo:* " + d.tipos.join(", "));
+      l.push("*Problema:* " + ou(d.detalhe));
+      return l.join("\n");
+    }
+  });
+
+  criarFormulario({
+    form:"f-site", prefixo:"s-",
+    campos:["nome","negocio","bairro","link","detalhe"],
+    obrigatorios:["nome","negocio","detalhe"],
+    erros:erros,
+    chips:["Site institucional","Página de vendas","Catálogo ou cardápio","Link na bio","Formulário de orçamento","Ainda não sei"],
+    exemplo:{nome:"Léo", negocio:"Barbearia do Léo", bairro:"Bangu", link:"@barbeariadoleo", tipos:["Página de vendas"], detalhe:"Mostrar os cortes e os preços, e o cliente marcar horário pelo WhatsApp."},
+    mensagem:function(d){
+      var l = ["Olá, Miguel! Vim pelo site da mg.celltech e quero um orçamento de site.", "",
+               "*Nome:* " + ou(d.nome), "*Negócio:* " + ou(d.negocio)];
+      if (d.bairro) l.push("*Bairro:* " + d.bairro);
+      if (d.link) l.push("*Instagram/site atual:* " + d.link);
+      if (d.tipos.length) l.push("*Tipo de site:* " + d.tipos.join(", "));
+      l.push("*O que precisa:* " + ou(d.detalhe));
+      return l.join("\n");
+    }
+  });
+
+  /* ================= rodapé ================= */
+  $("copiar").addEventListener("click", function(){
+    var aviso = $("copied");
+    function selecionar(){
+      var r = document.createRange(); r.selectNodeContents($("num"));
+      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+      aviso.textContent = "Número selecionado, é só copiar.";
+    }
+    try { navigator.clipboard.writeText("21 98111-9638").then(function(){ aviso.textContent = "Número copiado."; }, selecionar); }
+    catch(e){ selecionar(); }
+  });
+
+  /* página inicial: #site ou #sites abre direto em Sites */
+  var h = (location.hash || "").replace("#","");
+  irPara(h === "site" || h === "sites" ? "site" : "celular", false);
+})();
+</script>
+</body>
+</html>
