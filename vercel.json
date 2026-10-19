@@ -1,5 +1,13 @@
 {
   "cleanUrls": true,
+  "redirects": [
+    { "source": "/%23celular", "destination": "/#celular", "permanent": false },
+    { "source": "/%23site", "destination": "/#site", "permanent": false },
+    { "source": "/%23sites", "destination": "/#site", "permanent": false },
+    { "source": "/celular", "destination": "/#celular", "permanent": false },
+    { "source": "/site", "destination": "/#site", "permanent": false },
+    { "source": "/sites", "destination": "/#site", "permanent": false }
+  ],
   "headers": [
     { "source": "/(.*)", "headers": [
       { "key": "X-Content-Type-Options", "value": "nosniff" },
